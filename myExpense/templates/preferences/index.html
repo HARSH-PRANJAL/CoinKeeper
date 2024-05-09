@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block content %}
+<h5>Prefered Currency</h5>
+<hr />
+<div class="input-group">
+  <form action="{% url 'prefernces' %}" method="POST">
+    {% csrf_token %}
+    <select class="custom-select" name="curency">
+      {% if user_prefrences %}
+      <option name="curency" selected>{{user_prefrences.currency}}</option>
+      {% else %}
+      <option name="curency" selected>Chose...</option>
+      {% endif %}
+      {% for curency in curency_data %}
+      <option name="curency" value="{{curency.name}} - {{curency.value}}">
+        {{curency.name}} - {{curency.value}}
+      </option>
+      {% endfor %}
+    </select>
+    <button class="btn btn-outline-secondary" type="submit">Save</button>
+  </form>
+</div>
+{% endblock %}

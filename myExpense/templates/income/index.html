@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% load static %} {% block content %} 
+{% if user.is_authenticated %}
+<h1>Income</h1>
+<hr />
+{% if income %}
+<div class="container-fluid d-flex justify-content-end align-items-center">
+  <form class="d-flex" role="search" action="" method="POST">
+    {% csrf_token %}
+    <input
+      class="form-control active me-2"
+      id="searchField"
+      type="search"
+      name="search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+  </form>
+</div>
+{% endif %}
+{% else %}
+<h1>Login</h1>
+{% endif %}
+<script>
+  const csrfToken = "{{ csrf_token }}";
+</script>
+<script src="{% static 'js/searchIncome.js' %}"></script>
+{% endblock content %}
