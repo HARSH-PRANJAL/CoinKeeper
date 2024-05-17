@@ -11,7 +11,7 @@ import os, json
 def index(request):
 
     curency_data = []
-    file_path = os.path.join(settings.BASE_DIR, "currencies.json")
+    file_path = os.path.join("currencies.json")
 
     with open(file_path, "r") as file:
         data = json.load(file)

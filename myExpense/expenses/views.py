@@ -13,13 +13,18 @@ import re
 @login_required(login_url="authentication/userlogin")
 def index(request):
     expenses = Expense.objects.filter(owner=request.user)
-    curency = UserPrefernces.objects.get(user=request.user).currency
+    curency = UserPrefernces.objects.filter(user=request.user)
+    if curency:
+        curency = UserPrefernces.objects.get(user=request.user).currency
+    else:
+        curency = None
     paginator = Paginator(expenses, 4)
     page_number = request.GET.get("page")
     page_obj = Paginator.get_page(paginator, page_number)
 
-    pattern = re.search(r"^[^-]*", curency)
-    curency = pattern.group()
+    if curency:
+        pattern = re.search(r"^[^-]*", curency)
+        curency = pattern.group()
 
     return render(
         request,

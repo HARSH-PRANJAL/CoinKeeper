@@ -7,4 +7,4 @@ class UserPrefernces(models.Model):
     currency = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
-        return str(self.user)+' s '+' prefernces'
+        return str(self.user)+' prefernces '+str(self.currency)

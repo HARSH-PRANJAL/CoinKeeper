@@ -37,12 +37,12 @@ searchField.addEventListener("keyup", (e) => {
                     <div class="row">
                       <div class="col-md-3">
                         <form action="/updateExpense" method="GET">
-                          <button class="btn btn-outline-success btn-sm" name="update" value="${
-                            element.id
-                          }"
-                            data-bs-toggle="button" aria-pressed="true">
-                            Edit
-                          </button>
+                        <button class="btn btn-outline-success btn-sm" name="update" value="${
+                          element.id
+                        }"
+                        >
+                        Edit
+                    </button>
                         </form>
                       </div>
                       <div class="col-md-3">
@@ -50,8 +50,7 @@ searchField.addEventListener("keyup", (e) => {
                         <input type="hidden" name="csrfmiddlewaretoken" value="${csrfToken}">
                           <button class="btn btn-outline-danger btn-sm" name="delete" value="${
                             element.id
-                          }"
-                            data-bs-toggle="button" aria-pressed="true">
+                          }">
                             X
                           </button>
                         </form>
