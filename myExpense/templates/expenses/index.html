@@ -1,4 +1,4 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
 {% load static %}
 {% block content %} {% if user.is_authenticated %}
 <h1>Expenses</h1>
@@ -7,7 +7,8 @@
 <div class="container-fluid d-flex justify-content-end align-items-center">
     <form class="d-flex" role="search" action="" method="POST">
         {% csrf_token %}
-        <input class="form-control active me-2" id="searchField" type="search" name="search" placeholder="Search" aria-label="Search">
+        <input class="form-control active me-2" id="searchField" type="search" name="search" placeholder="Search"
+            aria-label="Search">
     </form>
 </div>
 
@@ -16,7 +17,11 @@
         <thead>
             <tr>
                 <th>Sno.</th>
+                {% if curency %}
                 <th>Amount({{curency}})</th>
+                {% else %}
+                <th>Amount</th>
+                {% endif %}
                 <th>Category</th>
                 <th>Description</th>
                 <th>Date</th>
@@ -36,8 +41,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <form action="{% url 'updateExpense' %}" method="GET">
-                                    <button class="btn btn-outline-success btn-sm" name="update" value="{{expense.id}}"
-                                        data-bs-toggle="button" aria-pressed="true">
+                                    <button class="btn btn-outline-success btn-sm" name="update" value="{{expense.id}}">
                                         Edit
                                     </button>
                                 </form>
@@ -45,8 +49,7 @@
                             <div class="col-md-3">
                                 <form action="{% url 'deleteExpense' %}" method="POST">
                                     {% csrf_token %}
-                                    <button class="btn btn-outline-danger btn-sm" name="delete" value="{{expense.id}}"
-                                        data-bs-toggle="button" aria-pressed="true">
+                                    <button class="btn btn-outline-danger btn-sm" name="delete" value="{{expense.id}}">
                                         X
                                     </button>
                                 </form>
@@ -64,7 +67,11 @@
         <thead>
             <tr>
                 <th>Sno.</th>
-                <th>Amount()</th>
+                {% if curency %}
+                <th>Amount({{curency}})</th>
+                {% else %}
+                <th>Amount</th>
+                {% endif %}
                 <th>Category</th>
                 <th>Description</th>
                 <th>Date</th>
@@ -72,7 +79,7 @@
             </tr>
         </thead>
         <tbody class="table2-body">
-           
+
         </tbody>
     </table>
 </div>
@@ -105,7 +112,7 @@
 
 {% endif %} {% else %}
 <h1>Login</h1>
-{% endif %} 
+{% endif %}
 <script>const csrfToken = "{{ csrf_token }}";</script>
 <script src="{% static 'js/searchExpenses.js' %}">
 </script>
