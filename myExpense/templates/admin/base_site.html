@@ -1,0 +1,26 @@
+{% extends 'admin/base.html' %} {% load static %}
+
+<!-- edit everything about djangoo admin page inside branding block -->
+{% block branding %}
+<!-- editing headder of page -->
+<!-- id = head is used to get the css of admin/base.html -->
+<h1 id="head">
+  <img src="{% static 'image/logo.png' %}" width="25" alt="logo"/>
+  Coin Keeper
+</h1>
+
+{% endblock %} {% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/adminStyle.css' %}" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&family=Manrope:wght@200&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&family=Manrope:wght@300&display=swap"
+  rel="stylesheet"
+/>
+{% endblock %}
