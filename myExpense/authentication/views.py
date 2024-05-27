@@ -101,6 +101,9 @@ class EmailvalidationView(View):
 
 class UserLoginView(View):
     def get(self, request):
+        msg = request.GET.get("message")
+        if msg:
+            messages.warning(request, msg)
         return render(request, "authentication/login.html")
 
     def post(self, request):
@@ -130,3 +133,39 @@ class UserLogoutView(View):
         logout(request)
         messages.success(request, "Logout successfully.")
         return redirect("login")
+
+
+class UserResetPassword(View):
+    def get(self, request):
+        return render(request, "authentication/resetPassword.html")
+
+    def post(self, request):
+        data = request.POST
+        context = {"fieldValues": request.POST}
+        email = data.get("email")
+        username = data.get("username")
+        password1 = data.get("password1")
+        password2 = data.get("password2")
+
+        if len(password1) < 8:
+            messages.error(request, "Password should be 8 charecter long")
+            return render(request, "authentication/resetPassword.html", context)
+
+        user = User.objects.filter(email=email)
+        if user.exists():
+            if not User.objects.filter(username=username).exists():
+                messages.error(request, "This username dose not exists")
+                return render(request, "authentication/resetPassword.html", context)
+            else:
+                if password1 == password2:
+                    user = User.objects.get(email=email)
+                    user.set_password(password1)
+                    user.save()
+                    messages.success(request, "Password reset successfull")
+                    return redirect("login")
+                else:
+                    messages.error(request, "Passwords don't match")
+                    return render(request, "authentication/resetPassword.html", context)
+        else:
+            messages.error(request, "This email dose not exists")
+            return render(request, "authentication/resetPassword.html", context)
