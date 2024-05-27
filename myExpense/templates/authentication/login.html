@@ -24,8 +24,10 @@
         name="password"
       />
     </div>
-    <div>Don't have an account<a href="{% url 'registration' %}"> Sigun Up </a>here</div>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary">Login</button><div class="d-flex justify-content-between mt-3">
+      <a href="{% url 'registration' %}" class="text-primary">Sign Up</a>
+      <a href="{% url 'resetPassword' %}" class="text-primary">Forgot Password?</a>
+    </div>
   </form>
 </div>
 </div>
