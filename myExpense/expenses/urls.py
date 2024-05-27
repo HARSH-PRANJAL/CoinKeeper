@@ -8,4 +8,6 @@ urlpatterns = [
     path("deleteExpense", views.deleteExpense, name="deleteExpense"),
     path("updateExpense", views.updateExpense, name="updateExpense"),
     path("searchExpense", csrf_exempt(views.searchExpense), name="searchExpense"),
+    path("expenseSummary", views.expenseSummary, name="expenseSummary"),
+    path("viewSummary", views.viewSummary, name="viewSummary"),
 ]

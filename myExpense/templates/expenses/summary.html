@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+<style>
+    .chart-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 300px;
+        max-height: 300px;
+        margin: 0 auto;
+        /* Center horizontally */
+    }
+</style>
+<div class="chart-container">
+    <canvas id="myChart"></canvas>
+</div>
+
+
+{% else %}
+<h1>Login</h1>
+{% endif %}
+<script src="{% static 'js/summary.js' %}"></script>
+{% endblock content %}

@@ -161,7 +161,7 @@ class UserResetPassword(View):
                     user = User.objects.get(email=email)
                     user.set_password(password1)
                     user.save()
-                    messages.success(request, "Password reset successfull")
+                    messages.success(request, "Password reset succesfull")
                     return redirect("login")
                 else:
                     messages.error(request, "Passwords don't match")

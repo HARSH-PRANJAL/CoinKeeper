@@ -1,3 +1,4 @@
+import datetime
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -168,3 +169,26 @@ def searchExpense(request):
 
         data = expenses.values()
         return JsonResponse(list(data), safe=False)
+
+
+def expenseSummary(request):
+    today_date = datetime.date.today()
+    sixMonths = today_date - datetime.timedelta(days=30 * 6)
+    expenses = Expense.objects.filter(
+        owner=request.user, date__gte=sixMonths, date__lte=today_date
+    )
+
+    # categories = list({i.category for i in expenses})
+    finalExpense = {}
+
+    for data in expenses:
+        if data.category not in finalExpense:
+            finalExpense[data.category] = data.amount
+        else:
+            finalExpense[data.category] += data.amount
+
+    return JsonResponse({"expenseSummaryData": finalExpense}, safe=False)
+
+def viewSummary(request):
+    return render(request,"expenses/summary.html")
+    
