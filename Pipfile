@@ -7,6 +7,7 @@ name = "pypi"
 validate-email = "*"
 psycopg2 = "*"
 django-session-timeout = "*"
+django = "*"
 
 [dev-packages]
 
