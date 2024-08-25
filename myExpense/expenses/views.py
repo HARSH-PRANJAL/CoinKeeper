@@ -10,7 +10,6 @@ import json
 import re
 
 
-# Create your views here.
 @login_required(login_url="authentication/userlogin")
 def index(request):
     expenses = Expense.objects.filter(owner=request.user)
@@ -78,6 +77,18 @@ def addExpenses(request):
         "expenses/addExpenses.html",
         {"categories": existingCategory, "values": values, "viewName": viewName},
     )
+
+@login_required
+def addCategory(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        user_input = data.get('userInput')
+        newCategory = Category.objects.create(name=user_input)
+        newCategory.save()
+
+        return JsonResponse({'success': True})
+    
+    return JsonResponse({'success': False,'error':"Backend error"})
 
 
 @login_required(login_url="authentication/userlogin")
@@ -160,17 +171,16 @@ def searchExpense(request):
         searchStr = json.loads(request.body).get("search")
         expenses = (
             Expense.objects.filter(amount__istartswith=searchStr, owner=request.user)
-            | Expense.objects.filter(date__istartswith=searchStr, owner=request.user)
+            | Expense.objects.filter(date__startswith=searchStr, owner=request.user)
             | Expense.objects.filter(category__icontains=searchStr, owner=request.user)
-            | Expense.objects.filter(
-                description__icontains=searchStr, owner=request.user
-            )
+            | Expense.objects.filter(description__icontains=searchStr, owner=request.user)
         )
 
         data = expenses.values()
+        print(data)
         return JsonResponse(list(data), safe=False)
 
-
+# api end point to get total expense category wise
 def expenseSummary(request):
     today_date = datetime.date.today()
     sixMonths = today_date - datetime.timedelta(days=30 * 6)

@@ -42,8 +42,7 @@ const getChartData = async () => {
     renderChart(resultData, labels);
   } catch (error) {
     console.error("Error fetching data:", error);
-    // Handle error gracefully (e.g., display an error message to the user)
   }
 };
 
-document.onload = getChartData(); // Add semicolon here
+document.onload = getChartData();

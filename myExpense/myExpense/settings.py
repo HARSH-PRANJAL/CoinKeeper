@@ -148,5 +148,6 @@ MESSAGE_TAGS = {
 
 # session timeout settings
 SESSION_EXPIRE_SECONDS = 3600 # 1hr
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_TIMEOUT_REDIRECT = "authentication/userlogin/?message=Session_Expired"
