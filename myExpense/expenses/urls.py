@@ -10,4 +10,5 @@ urlpatterns = [
     path("searchExpense", csrf_exempt(views.searchExpense), name="searchExpense"),
     path("expenseSummary", views.expenseSummary, name="expenseSummary"),
     path("viewSummary", views.viewSummary, name="viewSummary"),
+    path("addCategory", csrf_exempt(views.addCategory), name="addCategory"),
 ]

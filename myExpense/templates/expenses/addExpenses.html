@@ -1,4 +1,6 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
 <h1>Add Expenses</h1>
 <div class="card">
   <div class="card-body">
@@ -30,20 +32,22 @@
 
       <div class="mb-3">
         <label for="disabledSelect" class="form-label">Categories*</label>
-        <select name="category" id="disabledSelect" class="form-select">
+        <select name="category" id="category" class="form-select" onchange="getUserInput()">
           {% if values.category %}
           <option name="curency" value="{{values.category}}" selected>
             {{values.category}}
           </option>
           {% else %}
-          <option name="curency" value="" selected>Chose...</option>
-          {% endif %} {% for category in categories %}
+          <option name="curency" value="Chose..." selected>Chose...</option>
+          {% endif %}
+          {% for category in categories %}
           <option name="category" value="{{category.name}}">
             {{category.name}}
           </option>
           {% endfor %}
+          <option name="category" value="other">other</option>
         </select>
-      </div>
+    </div>
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Date</label>
         <input
@@ -62,5 +66,7 @@
     </form>
   </div>
 </div>
+
+<script src="{% static 'js/addCategory.js' %}"></script>
 
 {% endblock content %}
